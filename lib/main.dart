@@ -15,30 +15,39 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   String inputValue = "Noch nichts";
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-            child: Padding(
-                padding: const EdgeInsets.only(
-                    left: standartPadding, right: standartPadding),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("eingabe vom Benutzer: $inputValue"),
-                      const SizedBox(height: standartPadding),
-                      TextField(
-                        decoration:
-                            const InputDecoration(border: OutlineInputBorder()),
-                        onChanged: (String newValue) {
-                          print("Der neue Wert ist: $newValue");
-                          setState(() => inputValue = newValue);
-                        },
-                      )
-                    ]))),
+        home: Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: standartPadding, right: standartPadding),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(controller.text),
+              const SizedBox(height: standartPadding),
+              TextField(
+                controller: controller,
+                decoration: const InputDecoration(border: OutlineInputBorder()),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  print(controller.text);
+                  setState(() {});
+                },
+                child: const Text("Text Setzen"),
+              ),
+            ],
+          ),
+        ),
       ),
-    );
+    ));
   }
 }
